@@ -8,12 +8,10 @@ namespace TP06.Models
         public DateTime fecha { get; set; }
         public bool finalizado { get; set; }
         public int IdU { get; set; }
+        public Usuarios usuario { get; set; }
 
-        public Usuarios Usuario { get; set; }
 
-        public Tareas() { }
-
-        public Tareas(int Id, string titulo, string descripcion, DateTime fecha, bool finalizado, int IdU)
+        public Tareas(int Id, string titulo, string descripcion, DateTime fecha, bool finalizado, int IdU, Usuarios usuario)
         {
             this.Id = Id;
             this.titulo = titulo;
@@ -21,6 +19,7 @@ namespace TP06.Models
             this.fecha = fecha;
             this.finalizado = finalizado;
             this.IdU = IdU;
+            this.usuario = usuario;
         }
     }
 }
