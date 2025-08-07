@@ -29,8 +29,8 @@ namespace TP06.Models
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                connection.Execute(query, new
-                {
+                connection.Execute(query, 
+                new{
                     Id = usuario.Id,
                     nombre = usuario.nombre,
                     apellido = usuario.apellido,
@@ -39,75 +39,98 @@ namespace TP06.Models
                     ultLogin = usuario.ultLogin,
                     password = usuario.password
                 });
+                
             }
         }
                 
         public List<Tareas> devolverTareas(int IdU)
         {
-        
-        }
+            string query = @"SELECT * FROM Tareas WHERE IdU = @pIdU";
 
-        public Tareas devolverTarea(int idtarea)
-        {
-           on ese Id
-        }
-
-        public void modificarTarea(Tareas tarea)
-        {
-            using (SqlConnection con = new SqlConnection(_connectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                con.Open();
-
-                string update = @"UPDATE Tareas SET 
-                                  titulo = @titulo, 
-                                  descripcion = @descripcion, 
-                                  fecha = @fecha, 
-                                  finalizado = @finalizado 
-                                  WHERE Id = @Id";
-
-                using (SqlCommand cmd = new SqlCommand(update, con))
-                {
-                    cmd.Parameters.AddWithValue("@titulo", tarea.titulo);
-                    cmd.Parameters.AddWithValue("@descripcion", tarea.descripcion);
-                    cmd.Parameters.AddWithValue("@fecha", tarea.fecha);
-                    cmd.Parameters.AddWithValue("@finalizado", tarea.finalizado);
-                    cmd.Parameters.AddWithValue("@Id", tarea.Id);
-
-                    cmd.ExecuteNonQuery();
-                }
+                return connection.Query<Tareas>(query, new { pIdU = IdU }).ToList();
             }
         }
 
+
+        public Tareas devolverTarea(int idtarea)
+        {
+            string query = @"SELECT * FROM Tareas WHERE Id = @pId";
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                return connection.QueryFirstOrDefault<Tareas>(query, new { pId = idtarea });
+            }
+        }
+
+      public void modificarTarea(Tareas tarea)
+        {
+            string query = @"UPDATE Tareas SET titulo = @titulo, descripcion = @descripcion, fecha = @fecha, finalizado = @finalizado, IdU = @IdUWHERE Id = @Id"; 
+                                                        
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Execute(query, new
+                {
+                    Id = tarea.Id,
+                    titulo = tarea.titulo,
+                    descripcion = tarea.descripcion,
+                    fecha = tarea.fecha,
+                    finalizado = tarea.finalizado,
+                    IdU = tarea.IdU
+                });
+            }
+        }
+
+
         public void eliminarTarea(int idTarea)
         {
-         
-           
+            string query = @"DELETE FROM Tareas WHERE Id = @pId";
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Execute(query, new { pId = idTarea });
+            }
         }
+
 
         public void crearTarea(Tareas tarea)
         {
-            
+            string query = @"INSERT INTO Tareas (Id, titulo, descripcion, fecha, finalizado, IdU)
+                            VALUES (@Id, @titulo, @descripcion, @fecha, @finalizado, @IdU)";
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Execute(query, new
+                {
+                    Id = tarea.Id,
+                    titulo = tarea.titulo,
+                    descripcion = tarea.descripcion,
+                    fecha = tarea.fecha,
+                    finalizado = tarea.finalizado,
+                    IdU = tarea.IdU
+                });
+            }
         }
 
         public void finalizarTarea(int idtarea)
         {
-            using (SqlConnection con = new SqlConnection(_connectionString))
+            string query = @"UPDATE Tareas SET finalizado = 1 WHERE Id = @pId";
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                con.Open();
-
-                string update = @"UPDATE Tareas SET finalizado = 1 WHERE Id = @idtarea";
-
-                using (SqlCommand cmd = new SqlCommand(update, con))
-                {
-                    cmd.Parameters.AddWithValue("@idtarea", idtarea);
-                    cmd.ExecuteNonQuery();
-                }
+                connection.Execute(query, new { pId = idtarea });
             }
         }
 
         public void actLogin(int IdU)
         {
-           
+            string query = @"UPDATE Usuarios SET ultLogin = GETDATE() WHERE Id = @pId";
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Execute(query, new { pId = IdU });
+            }
         }
     }
 }
