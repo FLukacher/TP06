@@ -1,7 +1,25 @@
-namespace TP06.Models;
-
-public class Usuarios
+namespace TP06.Models
 {
+    public class Usuarios
+    {
+        public int Id { get; set; }
+        public string nombre { get; set; }
+        public string apellido { get; set; }
+        public string foto { get; set; }
+        public string username { get; set; }
+        public DateTime ultLogin { get; set; }
+        public string password { get; set; }
+        public List<Tareas> Tareas { get; set; }
 
-
+        public Usuarios(int Id, string nombre, string apellido, string foto, string username, DateTime ultLogin, string password)
+        {
+            this.Id = Id;
+            this.nombre = nombre;
+            this.apellido = apellido;
+            this.foto = foto;
+            this.username = username;
+            this.ultLogin = ultLogin;
+            this.password = password;
+        }
+    }
 }
