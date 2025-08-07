@@ -1,6 +1,6 @@
 namespace TP06.Models;
 
-public class Tarea
+public class Tareas
 {
 
 
