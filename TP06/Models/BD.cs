@@ -6,7 +6,7 @@ using Microsoft.Data.SqlClient;
 using Dapper;
 namespace TP06.Models
 {
-    public class BD
+    public static class BD
     {
         private static string _connectionString = @"Server=localhost;
         DataBase=Integrantes;Integrated Security=True;TrustServerCertificate=True;";
@@ -15,14 +15,14 @@ namespace TP06.Models
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                string query = @"SELECT * FROM Integrante WHERE username = @pUsuario AND password = @pPassword";
+                string query = @"SELECT * FROM Usuarios WHERE username = @pUsuario AND password = @pPassword";
                 return connection.QueryFirstOrDefault<Usuarios>(
                     query,
                     new { pUsuario = username, pPassword = password }
                 );
             }
         }
-        public void registrarse(Usuarios usuario)
+        public static void registrarse(Usuarios usuario)
         {
             string query = @"INSERT INTO Usuarios (Id, nombre, apellido, foto, username, ultLogin, password) 
                             VALUES (@Id, @nombre, @apellido, @foto, @username, @ultLogin, @password)";
@@ -43,7 +43,7 @@ namespace TP06.Models
             }
         }
                 
-        public List<Tareas> devolverTareas(int IdU)
+        public static List<Tareas> devolverTareas(int IdU)
         {
             string query = @"SELECT * FROM Tareas WHERE IdU = @pIdU";
 
@@ -54,7 +54,7 @@ namespace TP06.Models
         }
 
 
-        public Tareas devolverTarea(int idtarea)
+        public static Tareas devolverTarea(int idtarea)
         {
             string query = @"SELECT * FROM Tareas WHERE Id = @pId";
 
@@ -64,7 +64,7 @@ namespace TP06.Models
             }
         }
 
-      public void modificarTarea(Tareas tarea)
+      public static void modificarTarea(Tareas tarea)
         {
             string query = @"UPDATE Tareas SET titulo = @titulo, descripcion = @descripcion, fecha = @fecha, finalizado = @finalizado, IdU = @IdUWHERE Id = @Id"; 
                                                         
@@ -83,7 +83,7 @@ namespace TP06.Models
         }
 
 
-        public void eliminarTarea(int idTarea)
+        public static void eliminarTarea(int idTarea)
         {
             string query = @"DELETE FROM Tareas WHERE Id = @pId";
 
@@ -94,7 +94,7 @@ namespace TP06.Models
         }
 
 
-        public void crearTarea(Tareas tarea)
+        public static void crearTarea(Tareas tarea)
         {
             string query = @"INSERT INTO Tareas (Id, titulo, descripcion, fecha, finalizado, IdU)
                             VALUES (@Id, @titulo, @descripcion, @fecha, @finalizado, @IdU)";
@@ -113,7 +113,7 @@ namespace TP06.Models
             }
         }
 
-        public void finalizarTarea(int idtarea)
+        public static void finalizarTarea(int idtarea)
         {
             string query = @"UPDATE Tareas SET finalizado = 1 WHERE Id = @pId";
 
@@ -123,7 +123,7 @@ namespace TP06.Models
             }
         }
 
-        public void actLogin(int IdU)
+        public static void actLogin(int IdU)
         {
             string query = @"UPDATE Usuarios SET ultLogin = GETDATE() WHERE Id = @pId";
 

@@ -1,0 +1,9 @@
+<form method="post" action="@Url.Action("LoginGuardar", "Account")"  autocomplete="off">
+    <input type="text" name="username" placeholder="Usuario"/>
+    <input type="password" name="password" placeholder="Contraseña" />
+    <button type="submit">Log in</button>
+</form>
+@if (ViewBag.error != null)
+{
+    <p style="color:red;">@ViewBag.error</p>
+}
