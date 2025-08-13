@@ -4,12 +4,12 @@ using System.Data;
 using System.Data.SqlClient;
 using Microsoft.Data.SqlClient;
 using Dapper;
+
 namespace TP06.Models
 {
     public static class BD
     {
-        private static string _connectionString = @"Server=localhost;
-        DataBase=Integrantes;Integrated Security=True;TrustServerCertificate=True;";
+        private static string _connectionString = @"Server=localhost;DataBase=TP06;Integrated Security=True;TrustServerCertificate=True;";
 
         public static Usuarios login(string username, string password)
         {
@@ -22,6 +22,7 @@ namespace TP06.Models
                 );
             }
         }
+
         public static void registrarse(Usuarios usuario)
         {
             string query = @"INSERT INTO Usuarios (Id, nombre, apellido, foto, username, ultLogin, password) 
@@ -39,7 +40,6 @@ namespace TP06.Models
                     ultLogin = usuario.ultLogin,
                     password = usuario.password
                 });
-                
             }
         }
                 
@@ -49,10 +49,9 @@ namespace TP06.Models
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                return connection.Query<Tareas>(query, new { pIdU = IdU }).ToList();
+                return connection.Query<Tareas>(query, new { pIdU = IdU }).AsList();
             }
         }
-
 
         public static Tareas devolverTarea(int idtarea)
         {
@@ -64,9 +63,9 @@ namespace TP06.Models
             }
         }
 
-      public static void modificarTarea(Tareas tarea)
+        public static void modificarTarea(Tareas tarea)
         {
-            string query = @"UPDATE Tareas SET titulo = @titulo, descripcion = @descripcion, fecha = @fecha, finalizado = @finalizado, IdU = @IdUWHERE Id = @Id"; 
+            string query = @"UPDATE Tareas SET titulo = @titulo, descripcion = @descripcion, fecha = @fecha, finalizado = @finalizado, IdU = @IdU WHERE Id = @Id"; 
                                                         
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
@@ -82,7 +81,6 @@ namespace TP06.Models
             }
         }
 
-
         public static void eliminarTarea(int idTarea)
         {
             string query = @"DELETE FROM Tareas WHERE Id = @pId";
@@ -92,7 +90,6 @@ namespace TP06.Models
                 connection.Execute(query, new { pId = idTarea });
             }
         }
-
 
         public static void crearTarea(Tareas tarea)
         {
