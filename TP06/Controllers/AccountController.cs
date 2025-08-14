@@ -23,7 +23,8 @@ namespace TP06.Controllers
 
             if (usuario != null)
             {
-                  BD.actLogin(usuario.Id); // Actualiza fecha de último login
+                BD.actLogin(usuario.Id); 
+    
                 return RedirectToAction("VerTareas", "Home");
             }
             else
@@ -44,26 +45,22 @@ namespace TP06.Controllers
         }
 
         [HttpPost]
-        public IActionResult RegistroGuardar(string nombre, string apellido, string username, string contraseña, string confirmarContraseña)
+        public IActionResult RegistroGuardar(string nombre, string apellido, string username, string password, string confirmarPassword)
         {
-            if (string.IsNullOrEmpty(nombre) || string.IsNullOrEmpty(apellido) ||
-                string.IsNullOrEmpty(username) || string.IsNullOrEmpty(contraseña) || 
-                string.IsNullOrEmpty(confirmarContraseña))
+            int i = 3;
+            if (string.IsNullOrEmpty(nombre) || string.IsNullOrEmpty(apellido) || string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(confirmarPassword))
             {
                 ViewBag.Error = "Complete todos los campos";
                 return View("Registro");
             }
 
-            if (contraseña != confirmarContraseña)
+            if (password != confirmarPassword)
             {
                 ViewBag.Error = "Las contraseñas no coinciden";
                 return View("Registro");
             }
-
-            // Evitar null en 'foto' y en la lista de tareas
-            Usuarios nuevoUsuario = new Usuarios(
-                0, nombre, apellido, null, username, DateTime.Now, contraseña
-            );
+            string fotoDefault = "/img/default.jpg";
+            Usuarios nuevoUsuario = new Usuarios(i++, nombre, apellido, fotoDefault, username, DateTime.Now, password);
             nuevoUsuario.Tareas = new List<Tareas>();
 
             BD.registrarse(nuevoUsuario);
