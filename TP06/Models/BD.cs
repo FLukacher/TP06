@@ -128,5 +128,16 @@ namespace TP06.Models
                 connection.Execute(query, new { pId = IdU });
             }
         }
+        public static bool UsernameExiste(string username)
+        {
+            string query = "SELECT COUNT(*) FROM Usuarios WHERE username = @username";
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                int count = connection.ExecuteScalar<int>(query, new { username = username });
+                return count > 0;
+            }
+        }
+
     }
 }

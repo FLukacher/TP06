@@ -58,6 +58,12 @@ namespace TP06.Controllers
                 ViewBag.Error = "Las contraseñas no coinciden";
                 return View("Registro");
             }
+            if (BD.UsernameExiste(username))
+            {
+                ViewBag.Error = "El nombre de usuario ya está en uso";
+                return View("Registro");
+            }
+
             string fotoDefault = "/img/default.jpg";
             Usuarios nuevoUsuario = new Usuarios(nombre, apellido, fotoDefault, username, DateTime.Now, password);
             nuevoUsuario.Tareas = new List<Tareas>();
