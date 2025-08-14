@@ -161,3 +161,4 @@ C:\Users\49121068\TP06\TP06\obj\Debug\net8.0\refint\TP06.dll
 C:\Users\49121068\TP06\TP06\obj\Debug\net8.0\TP06.pdb
 C:\Users\49121068\TP06\TP06\obj\Debug\net8.0\TP06.genruntimeconfig.cache
 C:\Users\49121068\TP06\TP06\obj\Debug\net8.0\ref\TP06.dll
+C:\Users\49091985\TP06\TP06\bin\Debug\net8.0\Newtonsoft.Json.dll

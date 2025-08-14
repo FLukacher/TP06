@@ -23,8 +23,8 @@ namespace TP06.Controllers
 
             if (usuario != null)
             {
-                BD.actLogin(usuario.Id); 
-    
+                BD.actLogin(usuario.Id);
+                HttpContext.Session.SetString("usuarioLogueado", Objeto.ObjectToString(usuario));
                 return RedirectToAction("VerTareas", "Home");
             }
             else
@@ -47,7 +47,6 @@ namespace TP06.Controllers
         [HttpPost]
         public IActionResult RegistroGuardar(string nombre, string apellido, string username, string password, string confirmarPassword)
         {
-            int i = 3;
             if (string.IsNullOrEmpty(nombre) || string.IsNullOrEmpty(apellido) || string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(confirmarPassword))
             {
                 ViewBag.Error = "Complete todos los campos";
@@ -60,7 +59,7 @@ namespace TP06.Controllers
                 return View("Registro");
             }
             string fotoDefault = "/img/default.jpg";
-            Usuarios nuevoUsuario = new Usuarios(i++, nombre, apellido, fotoDefault, username, DateTime.Now, password);
+            Usuarios nuevoUsuario = new Usuarios(nombre, apellido, fotoDefault, username, DateTime.Now, password);
             nuevoUsuario.Tareas = new List<Tareas>();
 
             BD.registrarse(nuevoUsuario);

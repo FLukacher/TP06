@@ -25,8 +25,15 @@ public class HomeController : Controller
     {
         return View();
     }
-    public IActionResult verTareas()
+    public IActionResult VerTareas()
     {
+        var usuarioJson = HttpContext.Session.GetString("usuarioLogueado");
+        if (usuarioJson == null)
+        {
+            return RedirectToAction("Login", "Account"); 
+        }
+        
+        ViewBag.Usuario = Objeto.StringToObject<Usuarios>(usuarioJson);
         return View();
     }
     public IActionResult editarTarea()

@@ -69,3 +69,7 @@ button:hover {
 .error{
   color: red;
 }
+.vertareas div img{
+  width: 20%;
+  height: 20%;
+}

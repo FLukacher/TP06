@@ -25,14 +25,13 @@ namespace TP06.Models
 
         public static void registrarse(Usuarios usuario)
         {
-            string query = @"INSERT INTO Usuarios (Id, nombre, apellido, foto, username, ultLogin, password) 
-                            VALUES (@Id, @nombre, @apellido, @foto, @username, @ultLogin, @password)";
+            string query = @"INSERT INTO Usuarios (nombre, apellido, foto, username, ultLogin, password) 
+                            VALUES (@nombre, @apellido, @foto, @username, @ultLogin, @password)";
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Execute(query, 
                 new{
-                    Id = usuario.Id,
                     nombre = usuario.nombre,
                     apellido = usuario.apellido,
                     foto = usuario.foto,
