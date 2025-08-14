@@ -12,7 +12,6 @@ public class HomeController : Controller
     {
         _logger = logger;
     }
-
     public IActionResult Index()
     {
         return View();
@@ -21,19 +20,48 @@ public class HomeController : Controller
     {
         return View();
     }
-    public IActionResult crearTareaGuardar()
+    public IActionResult crearTareaGuardar(string titulo, string descripcion, DateTime fecha)
     {
-        return View();
+        string usuarioLogueadoJson = HttpContext.Session.GetString("usuarioLogueado");
+
+        if (string.IsNullOrEmpty(usuarioLogueadoJson))
+        {
+            ViewBag.Error = "Debes iniciar sesión para crear una tarea";
+            return RedirectToAction("Login");
+        }
+
+        if (string.IsNullOrEmpty(titulo) || string.IsNullOrEmpty(descripcion) || fecha == null)
+        {
+            ViewBag.Error = "Complete todos los campos";
+            return View("CrearTarea"); 
+        }
+
+
+        Usuarios usuario = Objeto.StringToObject<Usuarios>(usuarioLogueadoJson);
+
+        if (usuario == null)
+        {
+            ViewBag.Error = "No se pudo obtener la información del usuario. Por favor, vuelve a iniciar sesión.";
+            return RedirectToAction("Login");
+        }
+
+        Tareas nuevaTarea = new Tareas(titulo, descripcion, fecha, usuario.Id, usuario);
+
+        BD.crearTarea(nuevaTarea);
+
+        return RedirectToAction("VerTareas");
     }
+
+
     public IActionResult VerTareas()
     {
-        var usuarioJson = HttpContext.Session.GetString("usuarioLogueado");
-        if (usuarioJson == null)
+  
+        if (HttpContext.Session.GetString("usuarioLogueado") == null)
         {
             return RedirectToAction("Login", "Account"); 
         }
         
-        ViewBag.Usuario = Objeto.StringToObject<Usuarios>(usuarioJson);
+        ViewBag.Usuario = Objeto.StringToObject<Usuarios>(HttpContext.Session.GetString("usuarioLogueado"));
         return View();
     }
     public IActionResult editarTarea()

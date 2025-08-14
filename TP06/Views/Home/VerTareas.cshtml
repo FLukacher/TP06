@@ -1,4 +1,9 @@
 <div class = "vertareas">
 <h1>@ViewBag.Usuario.username</h1>
 <img src="@(ViewBag.Usuario != null ? ViewBag.Usuario.foto : "/img/default.jpg")" alt="Foto de usuario" />
+@if(ViewBag.Usuario.Tareas.Count == 0){
+    <p class = "error">no hay tareas disponibles</p>
+}
+<a href="@Url.Action("CrearTarea", "Home")"><button>Crear Tareas</button></a>
 <div>
+

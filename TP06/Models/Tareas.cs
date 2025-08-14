@@ -11,13 +11,12 @@ namespace TP06.Models
         public Usuarios usuario { get; set; }
 
 
-        public Tareas(int Id, string titulo, string descripcion, DateTime fecha, bool finalizado, int IdU, Usuarios usuario)
+        public Tareas(string titulo, string descripcion, DateTime fecha, int IdU, Usuarios usuario)
         {
-            this.Id = Id;
             this.titulo = titulo;
             this.descripcion = descripcion;
             this.fecha = fecha;
-            this.finalizado = finalizado;
+            this.finalizado = false;
             this.IdU = IdU;
             this.usuario = usuario;
         }
