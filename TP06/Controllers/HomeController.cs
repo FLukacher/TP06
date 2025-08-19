@@ -55,13 +55,24 @@ public class HomeController : Controller
 
     public IActionResult VerTareas()
     {
-  
-        if (HttpContext.Session.GetString("usuarioLogueado") == null)
+
+        string usuarioLogueadoJson = HttpContext.Session.GetString("usuarioLogueado");
+        Usuarios usuario = Objeto.StringToObject<Usuarios>(usuarioLogueadoJson);
+
+        List<Tareas> tareas = BD.obtenerTareasPorUsuario(usuario.Id);
+
+        List<Tareas> tareasPendientes = new List<Tareas>();
+
+        foreach (Tareas tarea in tareas)
         {
-            return RedirectToAction("Login", "Account"); 
+            if (!tarea.finalizado)
+            {
+                tareasPendientes.Add(tarea);
+            }
         }
-        
-        ViewBag.Usuario = Objeto.StringToObject<Usuarios>(HttpContext.Session.GetString("usuarioLogueado"));
+
+        ViewBag.Usuario = usuario;
+        ViewBag.Tareas = tareasPendientes;
         return View();
     }
     public IActionResult editarTarea()
@@ -76,8 +87,9 @@ public class HomeController : Controller
     {
         return View();
     }
-    public IActionResult finalizarTarea()
-    {
-        return View();
+    public IActionResult finalizarTarea(int id)
+    {   
+        BD.eliminarTarea(id);
+        return RedirectToAction("VerTareas");
     }
 }

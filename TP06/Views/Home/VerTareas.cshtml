@@ -1,9 +1,32 @@
-<div class = "vertareas">
-<h1>@ViewBag.Usuario.username</h1>
-<img src="@(ViewBag.Usuario != null ? ViewBag.Usuario.foto : "/img/default.jpg")" alt="Foto de usuario" />
-@if(ViewBag.Usuario.Tareas.Count == 0){
-    <p class = "error">no hay tareas disponibles</p>
-}
-<a href="@Url.Action("CrearTarea", "Home")"><button>Crear Tareas</button></a>
-<div>
+<div class="vertareas">
+    <div class="usuario-info">
+        <h1>@ViewBag.Usuario.username</h1>
+        <img src="@(ViewBag.Usuario != null ? ViewBag.Usuario.foto : "/img/default.jpg")" alt="Foto de usuario" />
+    </div>
 
+    @if (ViewBag.Tareas != null && ViewBag.Tareas.Count > 0)
+    {
+        <h2>Tareas asignadas:</h2>
+        <div class="tareas-list">
+            @foreach (var tarea in ViewBag.Tareas)
+            {
+                <div class="tarea-card">
+                    <h3>@tarea.titulo</h3>
+                    <p><strong>Descripción:</strong> @tarea.descripcion</p>
+                    <p><strong>Fecha:</strong> @tarea.fecha.ToShortDateString()</p>
+                    <a href="@Url.Action("finalizarTarea", "Home", new { id = tarea.Id })">
+                        <button class="btn-secundario">Finalizar Tarea</button>
+                    </a>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <p class="verde">Tenés todo al día, no hay tareas pendientes!</p>
+    }
+
+    <a href="@Url.Action("CrearTarea", "Home")">
+        <button class="btn-principal">Crear Tareas</button>
+    </a>
+</div>

@@ -92,14 +92,13 @@ namespace TP06.Models
 
         public static void crearTarea(Tareas tarea)
         {
-            string query = @"INSERT INTO Tareas (Id, titulo, descripcion, fecha, finalizado, IdU)
-                            VALUES (@Id, @titulo, @descripcion, @fecha, @finalizado, @IdU)";
+            string query = @"INSERT INTO Tareas (titulo, descripcion, fecha, finalizado, IdU)
+                            VALUES (@titulo, @descripcion, @fecha, @finalizado, @IdU)";
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Execute(query, new
                 {
-                    Id = tarea.Id,
                     titulo = tarea.titulo,
                     descripcion = tarea.descripcion,
                     fecha = tarea.fecha,
@@ -117,6 +116,32 @@ namespace TP06.Models
             {
                 connection.Execute(query, new { pId = idtarea });
             }
+        }
+        public static List<Tareas> obtenerTareasPorUsuario(int idUsuario)
+        {
+            List<Tareas> lista = new List<Tareas>();
+
+            string query = @"SELECT * FROM Tareas WHERE IdU = @IdU";
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                lista = connection.Query<Tareas>(query, new { IdU = idUsuario }).ToList();
+            }
+
+            return lista;
+        }
+        public static Tareas obtenerTareaPorId(int id)
+        {
+            Tareas tarea = null;
+
+            string query = @"SELECT * FROM Tareas WHERE Id = @Id";
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                tarea = connection.QueryFirstOrDefault<Tareas>(query, new { Id = id });
+            }
+
+            return tarea;
         }
 
         public static void actLogin(int IdU)

@@ -20,5 +20,8 @@ namespace TP06.Models
             this.IdU = IdU;
             this.usuario = usuario;
         }
+
+        public Tareas() { }
+
     }
 }
