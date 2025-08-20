@@ -1,3 +1,4 @@
+/* Reset básico y base */
 html {
   font-size: 14px;
   min-height: 100%;
@@ -18,45 +19,155 @@ body {
   background: #f5f6fa;
   font-family: Arial, sans-serif;
 }
-.usuario-info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    margin-top: 20px;
+
+/* Contenedor principal de tareas */
+.vertareas {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.usuario-info img {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    object-fit: cover;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+/* Info usuario */
+.usuario-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 20px;
+  text-align: center;
+  margin-bottom: 30px;
 }
 
 .usuario-info h1 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-    color: #333;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.usuario-info img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  margin-top: 10px;
+}
+
+/* Lista de tareas */
+.tareas-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.tarea-card {
+  background-color: #f1f3f5;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.tarea-card h3 {
+  margin-top: 0;
+  color: #333;
+}
+
+.tarea-card p {
+  margin: 5px 0;
+  color: #555;
+}
+
+/* Botones generales */
+button {
+  width: 100%;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  color: #ffffff;
+  background-color: #007bff;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Botones específicos */
+.btn-principal {
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 1rem;
+  width: auto;
+  background-color: #007bff;
+  margin-top: 10px;
+}
+
+.btn-principal:hover {
+  background-color: #0056b3;
+}
+
+.btn-secundario {
+  background-color: #28a745;
+  color: white;
+  width: auto;
+  padding: 10px 20px;
+  border-radius: 6px;
+  margin-top: 10px;
+}
+
+.btn-secundario:hover {
+  background-color: #218838;
 }
 
 .btn-3 {
-    width: 120px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  width: 120px;
+  background-color: #007bff;
+  padding: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  color: white;
+  border: none;
 }
 
-footer {
-  margin-top: 10px;
-  padding: 10px;
-  background-color: #f8f9fa;
-  border-top: 1px solid #e9ecef;
+.btn-3:hover {
+  background-color: #0056b3;
 }
+
+.btn-4 {
+  margin-top: 7%;
+  background-color: #007bff;
+  color: white;
+  width: auto;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-4:hover {
+  background-color: #0056b3;
+}
+
+.btn-5 {
+  margin-top: 7%;
+  background-color: #ff0000;
+  color: white;
+  width: auto;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-5:hover {
+  background-color: #b30000;
+}
+
+/* Formulario */
 form {
   background: #ffffff;
   padding: 2rem;
@@ -64,42 +175,10 @@ form {
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   width: 100%;
   max-width: 400px;
-}
-.index-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f5f6fa;
-
+  box-sizing: border-box;
 }
 
-.index-container div {
-    display: flex;
-    gap: 20px;
-}
-
-.index-container div a button {
-    padding: 12px 24px;
-    font-size: 1rem;
-    border: none;
-    border-radius: 6px;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.index-container div a button:hover {
-    background-color: #0056b3;
-}
-label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: bold;
-  color: #333333;
-}
-
+/* Inputs */
 input {
   width: 100%;
   padding: 0.75rem;
@@ -109,144 +188,64 @@ input {
   box-sizing: border-box;
 }
 
-
-button {
-  width: 100%;
-  padding: 0.75rem;
-  background-color: #007bff;
-  color: #ffffff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 1rem;
+/* Labels */
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: #333333;
 }
 
-button:hover {
+/* Contenedor Index */
+.index-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f5f6fa;
+}
+
+.index-container div {
+  display: flex;
+  gap: 20px;
+}
+
+.index-container div a button {
+  padding: 12px 24px;
+  font-size: 1rem;
+  border-radius: 6px;
+  background-color: #007bff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.index-container div a button:hover {
   background-color: #0056b3;
 }
-button {
-  width: 100%;
-  padding: 0.75rem;
-  background-color: #007bff;
-  color: #ffffff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 1rem;
-}
 
-button:hover {
-  background-color: #0056b3;
-}
-.error{
+/* Mensajes de error y éxito */
+.error {
   color: red;
+  font-weight: bold;
+  text-align: center;
 }
-.vertareas div img{
+
+.verde {
+  color: rgb(66, 170, 2);
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Footer */
+footer {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #f8f9fa;
+  border-top: 1px solid #e9ecef;
+}
+
+/* Imagenes pequeñas dentro .vertareas div */
+.vertareas div img {
   width: 20%;
   height: 20%;
-}
-.vertareas {
-    max-width: 800px;
-    margin: 40px auto;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-.usuario-info {
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-.usuario-info img {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-top: 10px;
-}
-
-.tareas-list {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.tarea-card {
-    background-color: #f1f3f5;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-}
-
-.tarea-card h3 {
-    margin-top: 0;
-    color: #333;
-}
-
-.tarea-card p {
-    margin: 5px 0;
-    color: #555;
-}
-
-.btn-principal, .btn-secundario {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 6px;
-    font-size: 1rem;
-    cursor: pointer;
-    margin-top: 10px;
-}
-
-.btn-principal {
-    background-color: #007bff;
-    color: white;
-}
-
-.btn-principal:hover {
-    background-color: #0056b3;
-}
-
-.btn-secundario {
-    background-color: #28a745;
-    color: white;
-}
-
-.btn-secundario:hover {
-    background-color: #218838;
-}
-
-.btn-secundario:hover {
-    background-color: #0056b3;
-}
-.btn-4 {
-  margin-top: 7%;
-  background-color: #007bff;
-  color: white;
-}
-
-.btn-4:hover {
-  background-color: #0056b3;
-}
-.btn-5 {
-  margin-top: 7%;
-  background-color: #ff0000;
-  color: white;
-}
-
-.btn-5:hover {
-  background-color: #b30000;
-}
-b
-
-.error {
-    color: red;
-    font-weight: bold;
-    text-align: center;
-}
-.verde{
-    color: rgb(66, 170, 2);
-    font-weight: bold;
-    text-align: center;
 }
