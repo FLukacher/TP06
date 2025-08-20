@@ -92,17 +92,26 @@ public class HomeController : Controller
 
     return RedirectToAction("VerTareas"); 
     }
-    public IActionResult editarTarea()
+    public IActionResult editarTarea(int id)
     {
+        Tareas tarea = BD.obtenerTareaPorId(id);
+
+        if (tarea == null)
+        {
+            return RedirectToAction("VerTareas");
+        }
+
+        HttpContext.Session.SetString("nuevaTarea", Objeto.ObjectToString(tarea));
+
         return View();
     }
+    [HttpPost]
     public IActionResult editarTareaGuardar(string titulo, string descripcion, DateTime fecha)
     {
         string tareaJson = HttpContext.Session.GetString("nuevaTarea");
 
         if (string.IsNullOrEmpty(tareaJson))
         {
-            ViewBag.Error = "No se encontró la tarea para editar.";
             return RedirectToAction("VerTareas");
         }
 
@@ -110,16 +119,27 @@ public class HomeController : Controller
 
         if (tareaEditar == null)
         {
-            ViewBag.Error = "Error al cargar la tarea para editar.";
             return RedirectToAction("VerTareas");
         }
 
+        // Actualizamos los datos con los recibidos del formulario
+        tareaEditar.titulo = titulo;
+        tareaEditar.descripcion = descripcion;
+        tareaEditar.fecha = fecha;
 
+        // Guardamos la tarea actualizada en la base de datos
         BD.modificarTarea(tareaEditar);
+
+    
         return RedirectToAction("VerTareas");
     }
 
     public IActionResult finalizarTarea(int id)
+    {
+        BD.finalizarTarea(id);
+        return RedirectToAction("VerTareas");
+    }
+    public IActionResult eliminarTarea(int id)
     {
         BD.eliminarTarea(id);
         return RedirectToAction("VerTareas");

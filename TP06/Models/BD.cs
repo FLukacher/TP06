@@ -89,7 +89,6 @@ namespace TP06.Models
                 connection.Execute(query, new { pId = idTarea });
             }
         }
-
         public static void crearTarea(Tareas tarea)
         {
             string query = @"INSERT INTO Tareas (titulo, descripcion, fecha, finalizado, IdU)
