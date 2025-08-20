@@ -220,6 +220,16 @@ button:hover {
 .btn-secundario:hover {
     background-color: #0056b3;
 }
+.btn-4 {
+  margin-top: 7%;
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-4:hover {
+  background-color: #0056b3;
+}
+
 .error {
     color: red;
     font-weight: bold;

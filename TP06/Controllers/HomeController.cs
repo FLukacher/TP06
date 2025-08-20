@@ -96,14 +96,29 @@ public class HomeController : Controller
     {
         return View();
     }
-    public IActionResult eliminarTarea()
+    public IActionResult editarTareaGuardar(string titulo, string descripcion, DateTime fecha)
     {
-        return View();
+        string tareaJson = HttpContext.Session.GetString("nuevaTarea");
+
+        if (string.IsNullOrEmpty(tareaJson))
+        {
+            ViewBag.Error = "No se encontró la tarea para editar.";
+            return RedirectToAction("VerTareas");
+        }
+
+        Tareas tareaEditar = Objeto.StringToObject<Tareas>(tareaJson);
+
+        if (tareaEditar == null)
+        {
+            ViewBag.Error = "Error al cargar la tarea para editar.";
+            return RedirectToAction("VerTareas");
+        }
+
+
+        BD.modificarTarea(tareaEditar);
+        return RedirectToAction("VerTareas");
     }
-    public IActionResult eliminarTareaGuardar()
-    {
-        return View();
-    }
+
     public IActionResult finalizarTarea(int id)
     {
         BD.eliminarTarea(id);
