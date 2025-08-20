@@ -1,12 +1,17 @@
-<div class="vertareas">
+<section class="vertareas">
     <div class="usuario-info">
         <h1>@ViewBag.Usuario.username</h1>
-        <img src="@(ViewBag.Usuario != null ? ViewBag.Usuario.foto : "/img/default.jpg")" alt="Foto de usuario" />
+        <img src="@ViewBag.Usuario.foto" alt="Foto de usuario" />
+
+    <form method="post" action="@Url.Action("EditarFoto", "Home")">
+        <button type="submit" class="btn-3">Editar foto</button>
+    </form>
+
     </div>
 
     @if (ViewBag.Tareas != null && ViewBag.Tareas.Count > 0)
     {
-        <h2>Tareas asignadas:</h2>
+        <h2>Tareas pendientes:</h2>
         <div class="tareas-list">
             @foreach (var tarea in ViewBag.Tareas)
             {
@@ -29,4 +34,4 @@
     <a href="@Url.Action("CrearTarea", "Home")">
         <button class="btn-principal">Crear Tareas</button>
     </a>
-</div>
+</section>

@@ -16,6 +16,10 @@ public class HomeController : Controller
     {
         return View();
     }
+    public IActionResult EditarFoto()
+    {
+        return View(); 
+    }
     public IActionResult crearTarea()
     {
         return View();
@@ -33,7 +37,7 @@ public class HomeController : Controller
         if (string.IsNullOrEmpty(titulo) || string.IsNullOrEmpty(descripcion) || fecha == null)
         {
             ViewBag.Error = "Complete todos los campos";
-            return View("CrearTarea"); 
+            return View("CrearTarea");
         }
 
 
@@ -75,6 +79,19 @@ public class HomeController : Controller
         ViewBag.Tareas = tareasPendientes;
         return View();
     }
+    public IActionResult GuardarFotoUrl(string fotoUrl)
+    {
+    string usuarioLogueadoJson = HttpContext.Session.GetString("usuarioLogueado");
+    Usuarios usuario = Objeto.StringToObject<Usuarios>(usuarioLogueadoJson);
+
+    if (!string.IsNullOrEmpty(fotoUrl))
+    {
+        usuario.foto = fotoUrl;
+        BD.ActualizarFoto(usuario.Id, fotoUrl); 
+    }
+
+    return RedirectToAction("VerTareas"); 
+    }
     public IActionResult editarTarea()
     {
         return View();
@@ -88,8 +105,10 @@ public class HomeController : Controller
         return View();
     }
     public IActionResult finalizarTarea(int id)
-    {   
+    {
         BD.eliminarTarea(id);
         return RedirectToAction("VerTareas");
     }
+
+
 }

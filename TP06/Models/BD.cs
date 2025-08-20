@@ -163,6 +163,14 @@ namespace TP06.Models
                 return count > 0;
             }
         }
+        public static void ActualizarFoto(int idUsuario, string nuevaUrl)
+        {
+            string query = "UPDATE Usuarios SET foto = @foto WHERE Id = @id";
 
+            using (SqlConnection con = new SqlConnection(_connectionString))
+            {
+                con.Execute(query, new { foto = nuevaUrl, id = idUsuario });
+            }
+        }
     }
 }

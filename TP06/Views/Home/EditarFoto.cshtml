@@ -1,0 +1,7 @@
+﻿@namespace TP06.Views.Home
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<form method="post" action="@Url.Action("GuardarFotoUrl", "Home")">
+    <label for="fotoUrl">Pegá la URL de tu nueva foto:</label>
+    <input type="text" id="fotoUrl" name="fotoUrl" placeholder="https://..." required style="width: 100%; margin-top: 10px;" />
+    <button type="submit" class="btn-3" style="margin-top: 15px;">Guardar</button>
+</form>

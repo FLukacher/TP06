@@ -10,7 +10,7 @@ namespace TP06.Models
         public int IdU { get; set; }
         public Usuarios usuario { get; set; }
 
-
+        public Tareas() { }
         public Tareas(string titulo, string descripcion, DateTime fecha, int IdU, Usuarios usuario)
         {
             this.titulo = titulo;
@@ -21,7 +21,6 @@ namespace TP06.Models
             this.usuario = usuario;
         }
 
-        public Tareas() { }
-
+        
     }
 }
