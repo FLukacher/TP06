@@ -122,12 +122,11 @@ public class HomeController : Controller
             return RedirectToAction("VerTareas");
         }
 
-        // Actualizamos los datos con los recibidos del formulario
         tareaEditar.titulo = titulo;
         tareaEditar.descripcion = descripcion;
         tareaEditar.fecha = fecha;
 
-        // Guardamos la tarea actualizada en la base de datos
+
         BD.modificarTarea(tareaEditar);
 
     
