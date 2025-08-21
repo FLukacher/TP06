@@ -84,27 +84,70 @@ public class HomeController : Controller
     string usuarioLogueadoJson = HttpContext.Session.GetString("usuarioLogueado");
     Usuarios usuario = Objeto.StringToObject<Usuarios>(usuarioLogueadoJson);
 
-    if (!string.IsNullOrEmpty(fotoUrl))
-    {
-        usuario.foto = fotoUrl;
-        BD.ActualizarFoto(usuario.Id, fotoUrl); 
-    }
+        if (!string.IsNullOrEmpty(fotoUrl))
+        {
+            usuario.foto = fotoUrl;
+            BD.ActualizarFoto(usuario.Id, fotoUrl);
+        }
+        else
+        {
+            ViewBag.Error = "Complete Todos los campos";
+        }
 
     return RedirectToAction("VerTareas"); 
     }
-    public IActionResult editarTarea()
+    public IActionResult editarTarea(int id)
     {
+        Tareas tarea = BD.obtenerTareaPorId(id);
+
+        if (tarea == null)
+        {
+            return RedirectToAction("VerTareas");
+        }
+
+        HttpContext.Session.SetString("nuevaTarea", Objeto.ObjectToString(tarea));
+
         return View();
     }
-    public IActionResult eliminarTarea()
+    [HttpPost]
+    public IActionResult editarTareaGuardar(string titulo, string descripcion, DateTime fecha)
     {
-        return View();
+        string tareaJson = HttpContext.Session.GetString("nuevaTarea");
+        if (string.IsNullOrEmpty(titulo) || string.IsNullOrEmpty(descripcion) || string.IsNullOrEmpty(fecha.ToString()))
+        {
+            ViewBag.Error = "Complete todos los campos";
+            return View("editarTarea");
+        }
+
+        else if (string.IsNullOrEmpty(tareaJson))
+        {
+            return RedirectToAction("VerTareas");
+        }
+
+        Tareas tareaEditar = Objeto.StringToObject<Tareas>(tareaJson);
+
+        if (tareaEditar == null)
+        {
+            return RedirectToAction("VerTareas");
+        }
+
+        tareaEditar.titulo = titulo;
+        tareaEditar.descripcion = descripcion;
+        tareaEditar.fecha = fecha;
+
+
+        BD.modificarTarea(tareaEditar);
+
+    
+        return RedirectToAction("VerTareas");
     }
-    public IActionResult eliminarTareaGuardar()
-    {
-        return View();
-    }
+
     public IActionResult finalizarTarea(int id)
+    {
+        BD.finalizarTarea(id);
+        return RedirectToAction("VerTareas");
+    }
+    public IActionResult eliminarTarea(int id)
     {
         BD.eliminarTarea(id);
         return RedirectToAction("VerTareas");

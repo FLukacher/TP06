@@ -1,10 +1,10 @@
 <a href="@Url.Action("Index", "Home")">
     <button class="btn-4">Volver a pagina principal</button>
 </a>
-<form method="post" action="@Url.Action("CrearTareaGuardar", "Home")"  autocomplete="off">
+<form method="post" action="@Url.Action("editarTareaGuardar", "Home")"  autocomplete="off">
     <input type="text" name="titulo" placeholder="Título" autocomplete= "off"/>
     <input type="text" name="descripcion" placeholder="descripción" autocomplete= "off"/>
      <input type="date" name="fecha" placeholder="Usuario" autocomplete= "off"/>
-    <button type="submit">Crear</button>
+    <button type="submit">Guardar</button>
 </form>
 <p class = "error">@ViewBag.error</p>

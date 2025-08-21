@@ -1,3 +1,6 @@
+<a href="@Url.Action("CerrarSesion", "Account")">
+    <button class="btn-4">Cerrar Sesion</button>
+</a>
 <section class="vertareas">
     <div class="usuario-info">
         <h1>@ViewBag.Usuario.username</h1>
@@ -20,8 +23,15 @@
                     <p><strong>Descripción:</strong> @tarea.descripcion</p>
                     <p><strong>Fecha:</strong> @tarea.fecha.ToShortDateString()</p>
                     <a href="@Url.Action("finalizarTarea", "Home", new { id = tarea.Id })">
-                        <button class="btn-secundario">Finalizar Tarea</button>
+                        <button class="btn-secundario">Finalizar</button>
                     </a>
+                    <a href="@Url.Action("eliminarTarea", "Home", new { id = tarea.Id })">
+                        <button class="btn-5">Eliminar</button>
+                    </a>
+                    <a href="@Url.Action("editarTarea", "Home", new { id = tarea.Id })">
+                        <button class="btn-4">Editar</button>
+                    </a>
+
                 </div>
             }
         </div>
