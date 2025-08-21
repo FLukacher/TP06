@@ -293,6 +293,7 @@ C:\Users\49091985\TP06\TP06\obj\Debug\net8.0\staticwebassets\msbuild.build.TP06.
 C:\Users\49091985\TP06\TP06\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.TP06.props
 C:\Users\49091985\TP06\TP06\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.TP06.props
 C:\Users\49091985\TP06\TP06\obj\Debug\net8.0\staticwebassets.pack.json
+<<<<<<< HEAD
 C:\Users\Usuario\Downloads\TP06-master\TP06-master\TP06\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\Usuario\Downloads\TP06-master\TP06-master\TP06\bin\Debug\net8.0\appsettings.json
 C:\Users\Usuario\Downloads\TP06-master\TP06-master\TP06\bin\Debug\net8.0\TP06.staticwebassets.runtime.json
@@ -398,3 +399,5 @@ C:\Users\Usuario\Downloads\TP06-master\TP06-master\TP06\obj\Debug\net8.0\refint\
 C:\Users\Usuario\Downloads\TP06-master\TP06-master\TP06\obj\Debug\net8.0\TP06.pdb
 C:\Users\Usuario\Downloads\TP06-master\TP06-master\TP06\obj\Debug\net8.0\TP06.genruntimeconfig.cache
 C:\Users\Usuario\Downloads\TP06-master\TP06-master\TP06\obj\Debug\net8.0\ref\TP06.dll
+=======
+>>>>>>> fc0932cf73f9a4560033fd48b9847ec4e06560d8
