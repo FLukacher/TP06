@@ -113,7 +113,7 @@ public class HomeController : Controller
     public IActionResult editarTareaGuardar(string titulo, string descripcion, DateTime fecha)
     {
         string tareaJson = HttpContext.Session.GetString("nuevaTarea");
-<<<<<<< HEAD
+
         if (string.IsNullOrEmpty(titulo) || string.IsNullOrEmpty(descripcion) || string.IsNullOrEmpty(fecha.ToString()))
         {
             ViewBag.Error = "Complete todos los campos";
@@ -121,10 +121,6 @@ public class HomeController : Controller
         }
 
         else if (string.IsNullOrEmpty(tareaJson))
-=======
-
-        if (string.IsNullOrEmpty(tareaJson))
->>>>>>> fc0932cf73f9a4560033fd48b9847ec4e06560d8
         {
             return RedirectToAction("VerTareas");
         }
